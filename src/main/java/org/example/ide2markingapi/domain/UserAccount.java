@@ -26,6 +26,7 @@ public class UserAccount {
     private Account account;
 
     private Boolean isDeleted;
+    private Boolean isBlocked;
 
     private LocalDateTime createAt;
 }

@@ -17,7 +17,7 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(unique = true, nullable = false , length = 9)
     private String actNo;
@@ -25,6 +25,13 @@ public class Account {
     @Column(unique = true,nullable = false,length = 100)
     private String actName;
 
+    @Column(length = 100)
+    private String alise;
+
+    @Column(nullable = false)
+    private BigDecimal balance;
+
+    @Column(nullable = false)
     private BigDecimal transferLimit;
 
     @ManyToOne
@@ -36,5 +43,5 @@ public class Account {
     @OneToOne()
     private Card card;
 
-
+    private Boolean isHidden;
 }

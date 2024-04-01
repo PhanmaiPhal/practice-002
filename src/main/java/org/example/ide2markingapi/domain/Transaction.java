@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -19,17 +20,22 @@ public class Transaction {
     private Long id;
 
     @ManyToOne
-    private Account sender;
+    private Account owner;
 
     @ManyToOne
-    private Account receiver;
+    private Account transferReceiver;
 
+    private String paymentReceiver;
+
+    private BigDecimal amount;
+
+    @Column(columnDefinition = "TEXT")
     private String remark;
 
-    private Boolean isPayment;
+    @Column(nullable = false,length = 30)
+    private String transactionType;
+
+    private Boolean status;
 
     private LocalDateTime transactionAt;
-
-    private Boolean isDelete;
-
 }
