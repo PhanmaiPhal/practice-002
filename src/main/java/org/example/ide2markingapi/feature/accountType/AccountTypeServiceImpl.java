@@ -1,8 +1,9 @@
-package org.example.ide2markingapi.feature.account;
+package org.example.ide2markingapi.feature.accountType;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.ide2markingapi.domain.AccountType;
-import org.example.ide2markingapi.feature.account.dto.AccountTypeResponse;
+import org.example.ide2markingapi.feature.accountType.dto.AccountTypeResponse;
 import org.example.ide2markingapi.mapper.AccountTypeMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,12 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
-
+@Slf4j
 public class AccountTypeServiceImpl implements AccountTypeService{
     private final AccountTypeRepository accountTypeRepository;
     private final AccountTypeMapper accountTypeMapper;
+//    private final AccountRe
+
 
     @Override
     public List<AccountTypeResponse> findAll() {

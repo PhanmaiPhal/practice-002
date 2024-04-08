@@ -3,14 +3,12 @@ package org.example.ide2markingapi.feature.users;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.ide2markingapi.base.BasedResponse;
 import org.example.ide2markingapi.domain.User;
-import org.example.ide2markingapi.feature.users.dto.UserPasswordRequest;
-import org.example.ide2markingapi.feature.users.dto.UserResponse;
-import org.example.ide2markingapi.feature.users.dto.UserUpdateRequest;
+import org.example.ide2markingapi.feature.users.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 
 @RequiredArgsConstructor
 @RestController
@@ -23,6 +21,7 @@ public class UserController {
     @PostMapping
     void createNew(@Valid @RequestBody UserCreateRequest userCreateRequest){
         userService.createNew(userCreateRequest);
+
     }
 
     @PatchMapping("/{uuid}")
@@ -57,5 +56,14 @@ public class UserController {
           @RequestParam(required = false,defaultValue = "2") int limit
     ){
         return userService.findList(page, limit);
+    }
+
+    @PutMapping("/{uuid}/profile-image")
+    BasedResponse<?> updateProfileImage(@PathVariable String uuid,
+                                        @Valid @RequestBody UserProfileUpdateRequest userProfileUpdateRequest){
+        String newProfileImageUri= userService.updateProfileImage(uuid,userProfileUpdateRequest.mediaImage());
+        return BasedResponse.builder()
+                .payload(newProfileImageUri)
+                .build();
     }
 }

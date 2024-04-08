@@ -5,10 +5,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.ide2markingapi.domain.Role;
 import org.example.ide2markingapi.domain.User;
+import org.example.ide2markingapi.feature.users.dto.UserCreateRequest;
 import org.example.ide2markingapi.feature.users.dto.UserPasswordRequest;
 import org.example.ide2markingapi.feature.users.dto.UserResponse;
 import org.example.ide2markingapi.feature.users.dto.UserUpdateRequest;
 import org.example.ide2markingapi.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService{
     private final RoleRepository roleRepository;
     private final UserMapper userMapper;
 
+    @Value("${media.base-uri}")
+    String mediaBaseUri;
+
 
    @Override
     public void createNew(UserCreateRequest request) {
@@ -48,7 +53,7 @@ public class UserServiceImpl implements UserService{
             );
         }
 
-        if(userRepository.existsByStudentIdCard(request.studentCardId())){
+        if(userRepository.existsByStudentIdCard(request.studentIdCard())){
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
                     "Student card id is already existed!"
@@ -69,6 +74,17 @@ public class UserServiceImpl implements UserService{
                         HttpStatus.NOT_FOUND,
                         "User role does not exist!"
                 ));
+        user.setRoles(roleList);
+        request.roles().forEach(r -> {
+            Role newRole = roleRepository.findByName(r.name())
+                    .orElseThrow(()->
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "Role User has not been found!"
+                            ));
+            roleList.add(newRole);
+        });
+
         // add role to roleList
         roleList.add(role);
 
@@ -158,4 +174,19 @@ public class UserServiceImpl implements UserService{
 
         return users.map(userMapper::toUserResponse);
     }
+
+    @Override
+    public String updateProfileImage(String uuid, String mediaName) {
+        User user = userRepository.findByUuid(uuid)
+                .orElseThrow(()->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                "User has not been found!"));
+        user.setProfileImage(mediaName);
+
+        userRepository.save(user);
+
+        return mediaBaseUri +"mages/" +mediaName;
+    }
+
+
 }
