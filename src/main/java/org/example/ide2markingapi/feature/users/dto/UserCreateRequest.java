@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.time.LocalDate;
 import java.util.List;
 
-public record UserCreateRequest<roles>(
+public record UserCreateRequest(
     @NotNull
     @Max(8000)
     @Positive

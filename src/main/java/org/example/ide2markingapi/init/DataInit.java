@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.ide2markingapi.domain.AccountType;
 import org.example.ide2markingapi.domain.CardType;
 import org.example.ide2markingapi.domain.Role;
-import org.example.ide2markingapi.feature.account.AccountTypeRepository;
+import org.example.ide2markingapi.feature.accountType.AccountTypeRepository;
 import org.example.ide2markingapi.feature.cardtype.CardTypeRepository;
 import org.example.ide2markingapi.feature.users.RoleRepository;
 import org.springframework.stereotype.Component;

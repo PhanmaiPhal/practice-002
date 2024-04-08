@@ -40,8 +40,10 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<UserAccount> userAccountList;
 
-    @OneToOne()
+    @OneToOne
     private Card card;
 
+    //uses to account on mobile app
     private Boolean isHidden;
+
 }

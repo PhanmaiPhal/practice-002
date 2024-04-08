@@ -1,5 +1,6 @@
 package org.example.ide2markingapi.feature.users;
 
+import org.example.ide2markingapi.feature.users.dto.UserCreateRequest;
 import org.example.ide2markingapi.feature.users.dto.UserPasswordRequest;
 import org.example.ide2markingapi.feature.users.dto.UserResponse;
 import org.example.ide2markingapi.feature.users.dto.UserUpdateRequest;
@@ -19,6 +20,8 @@ public interface UserService {
 
     void deleteByUuid(String uuid);
     Page<UserResponse> findList(int page, int limit);
+
+    String updateProfileImage(String uuid, String mediaName);
 
 
 }

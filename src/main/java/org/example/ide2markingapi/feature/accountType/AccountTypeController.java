@@ -1,7 +1,7 @@
-package org.example.ide2markingapi.feature.account;
+package org.example.ide2markingapi.feature.accountType;
 
 import lombok.RequiredArgsConstructor;
-import org.example.ide2markingapi.feature.account.dto.AccountTypeResponse;
+import org.example.ide2markingapi.feature.accountType.dto.AccountTypeResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
