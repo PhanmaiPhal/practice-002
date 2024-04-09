@@ -23,9 +23,13 @@ public class ServiceException {
         BasedError<String> baseError = new BasedError<>();
         baseError.setCode(ex.getStatusCode().toString());
         baseError.setDescription(ex.getReason());
+<<<<<<< HEAD
 
         return ResponseEntity.status(ex.getStatusCode())
                 .body(baseError);
+=======
+        return ResponseEntity.ok(baseError);
+>>>>>>> origin/homework4
     }
 
 

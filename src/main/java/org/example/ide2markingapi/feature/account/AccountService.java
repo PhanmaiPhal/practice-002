@@ -13,10 +13,17 @@ public interface AccountService {
     AccountResponse findAccountByActNumber(String accountNumber);
 
     AccountResponse renameByActNo(String actNo, AccountRenameRequest request);
+<<<<<<< HEAD
     void hideAccountByActNo(String actNo);
 
     AccountResponse updateTransferLimit(String actNo, AccountTransferLimitRequest accountTransferLimitRequest);
 
 
     Page<AccountResponse> findAllAccount(int page, int size);
+=======
+    Page<AccountResponse> findList(int page, int size);
+    void hideAccount(String actNo);
+
+    AccountResponse updateTransferLimit(String actNo, AccountTransferLimitRequest accountTransferLimitRequest);
+>>>>>>> origin/homework4
 }
